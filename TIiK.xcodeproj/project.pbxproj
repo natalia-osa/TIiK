@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6447042216F8EC3300BB1A99 /* Pol.txt in Resources */ = {isa = PBXBuildFile; fileRef = 6447042116F8EC3300BB1A99 /* Pol.txt */; };
+		6447042416F8EEE500BB1A99 /* Inf.txt in Resources */ = {isa = PBXBuildFile; fileRef = 6447042316F8EEE500BB1A99 /* Inf.txt */; };
+		6447042716F92A4F00BB1A99 /* StringHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 6447042616F92A4F00BB1A99 /* StringHelper.m */; };
 		64ED5EB516F8E85E003F0203 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 64ED5EB416F8E85E003F0203 /* UIKit.framework */; };
 		64ED5EB716F8E85E003F0203 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 64ED5EB616F8E85E003F0203 /* Foundation.framework */; };
 		64ED5EB916F8E85E003F0203 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 64ED5EB816F8E85E003F0203 /* CoreGraphics.framework */; };
@@ -18,9 +21,15 @@
 		64ED5ECB16F8E85E003F0203 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 64ED5ECA16F8E85E003F0203 /* Default@2x.png */; };
 		64ED5ECD16F8E85E003F0203 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 64ED5ECC16F8E85E003F0203 /* Default-568h@2x.png */; };
 		64ED5ED016F8E85E003F0203 /* TIiK.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 64ED5ECE16F8E85E003F0203 /* TIiK.xcdatamodeld */; };
+		64ED5EDA16F8E962003F0203 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 64ED5ED916F8E962003F0203 /* MainViewController.m */; };
+		64ED5EDC16F8EAF5003F0203 /* Eng.txt in Resources */ = {isa = PBXBuildFile; fileRef = 64ED5EDB16F8EAF5003F0203 /* Eng.txt */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		6447042116F8EC3300BB1A99 /* Pol.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = Pol.txt; path = Resources/Pol.txt; sourceTree = "<group>"; };
+		6447042316F8EEE500BB1A99 /* Inf.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = Inf.txt; path = Resources/Inf.txt; sourceTree = "<group>"; };
+		6447042516F92A4F00BB1A99 /* StringHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = StringHelper.h; path = Helpers/StringHelper.h; sourceTree = "<group>"; };
+		6447042616F92A4F00BB1A99 /* StringHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = StringHelper.m; path = Helpers/StringHelper.m; sourceTree = "<group>"; };
 		64ED5EB116F8E85E003F0203 /* TIiK.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TIiK.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		64ED5EB416F8E85E003F0203 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		64ED5EB616F8E85E003F0203 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -36,6 +45,9 @@
 		64ED5ECA16F8E85E003F0203 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
 		64ED5ECC16F8E85E003F0203 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		64ED5ECF16F8E85E003F0203 /* TIiK.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = TIiK.xcdatamodel; sourceTree = "<group>"; };
+		64ED5ED816F8E962003F0203 /* MainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MainViewController.h; path = ViewControllers/MainViewController.h; sourceTree = "<group>"; };
+		64ED5ED916F8E962003F0203 /* MainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MainViewController.m; path = ViewControllers/MainViewController.m; sourceTree = "<group>"; };
+		64ED5EDB16F8EAF5003F0203 /* Eng.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = Eng.txt; path = Resources/Eng.txt; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,7 +68,10 @@
 		64ED5EA816F8E85E003F0203 = {
 			isa = PBXGroup;
 			children = (
-				64ED5EBC16F8E85E003F0203 /* TIiK */,
+				64ED5EBC16F8E85E003F0203 /* Classes */,
+				64ED5ED616F8E869003F0203 /* Models */,
+				64ED5ED716F8E88A003F0203 /* Resources */,
+				64ED5EBD16F8E85E003F0203 /* Supporting Files */,
 				64ED5EB316F8E85E003F0203 /* Frameworks */,
 				64ED5EB216F8E85E003F0203 /* Products */,
 			);
@@ -81,14 +96,17 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		64ED5EBC16F8E85E003F0203 /* TIiK */ = {
+		64ED5EBC16F8E85E003F0203 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
 				64ED5EC516F8E85E003F0203 /* TIiKAppDelegate.h */,
 				64ED5EC616F8E85E003F0203 /* TIiKAppDelegate.m */,
-				64ED5ECE16F8E85E003F0203 /* TIiK.xcdatamodeld */,
-				64ED5EBD16F8E85E003F0203 /* Supporting Files */,
+				64ED5ED816F8E962003F0203 /* MainViewController.h */,
+				64ED5ED916F8E962003F0203 /* MainViewController.m */,
+				6447042516F92A4F00BB1A99 /* StringHelper.h */,
+				6447042616F92A4F00BB1A99 /* StringHelper.m */,
 			);
+			name = Classes;
 			path = TIiK;
 			sourceTree = "<group>";
 		};
@@ -104,6 +122,26 @@
 				64ED5ECC16F8E85E003F0203 /* Default-568h@2x.png */,
 			);
 			name = "Supporting Files";
+			path = TIiK;
+			sourceTree = "<group>";
+		};
+		64ED5ED616F8E869003F0203 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				64ED5ECE16F8E85E003F0203 /* TIiK.xcdatamodeld */,
+			);
+			name = Models;
+			path = TIiK;
+			sourceTree = "<group>";
+		};
+		64ED5ED716F8E88A003F0203 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				64ED5EDB16F8EAF5003F0203 /* Eng.txt */,
+				6447042116F8EC3300BB1A99 /* Pol.txt */,
+				6447042316F8EEE500BB1A99 /* Inf.txt */,
+			);
+			name = Resources;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -162,6 +200,9 @@
 				64ED5EC916F8E85E003F0203 /* Default.png in Resources */,
 				64ED5ECB16F8E85E003F0203 /* Default@2x.png in Resources */,
 				64ED5ECD16F8E85E003F0203 /* Default-568h@2x.png in Resources */,
+				64ED5EDC16F8EAF5003F0203 /* Eng.txt in Resources */,
+				6447042216F8EC3300BB1A99 /* Pol.txt in Resources */,
+				6447042416F8EEE500BB1A99 /* Inf.txt in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -175,6 +216,8 @@
 				64ED5EC316F8E85E003F0203 /* main.m in Sources */,
 				64ED5EC716F8E85E003F0203 /* TIiKAppDelegate.m in Sources */,
 				64ED5ED016F8E85E003F0203 /* TIiK.xcdatamodeld in Sources */,
+				64ED5EDA16F8E962003F0203 /* MainViewController.m in Sources */,
+				6447042716F92A4F00BB1A99 /* StringHelper.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -257,6 +300,7 @@
 				GCC_PREFIX_HEADER = "TIiK/TIiK-Prefix.pch";
 				INFOPLIST_FILE = "TIiK/TIiK-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -268,6 +312,7 @@
 				GCC_PREFIX_HEADER = "TIiK/TIiK-Prefix.pch";
 				INFOPLIST_FILE = "TIiK/TIiK-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
@@ -291,6 +336,7 @@
 				64ED5ED516F8E85E003F0203 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 

@@ -6,6 +6,32 @@
 //  Copyright (c) 2013 Politechnika Poznańska. All rights reserved.
 //
 
+/** Teoria informacji i kodowania *** Idzikowska ***
+ 
+ 
+ ### Informacje ogólne o przedmiocie ###
+ -- oceny na bazie tego, co zrobiliśmy
+ -- może być sprawdzian np. w domu zrobić metodę x-x a na zajęciach zakodować metodą x-x
+ -- dowolne środowisko i język programowania, nie korzystamy z bibliotek
+ -- jeden wspólny program na wszystkie laborki (różne moduły)
+ -- case sensitive
+ 
+ 
+ ### Laboratoria 1 ###
+ 1. Przygotuj 3 pliki, przy czym każdy plik powinien zawierać przynajmniej 6000 znaków:
+ 1.1. Litery w języku polskim,
+ 1.2. Informatyczny w języku polskim,
+ 1.3. Dowolny w j. angielskim.
+ 2. Napisz program, który czyta plik tekstowy i wypisuje wszystkie występujące w nim znaki oraz wyznacza częstość ich występowania.
+ 3. Program mam wyznaczać też entropię binarną obliczonego rozkładu prawdopodobieństwa i wyznaczać ilość informacji w poszczególnych znakach.
+ 4. Wykonaj program dla trzech przygotowanych plików i porównaj wyniki.
+ 
+ Wzór: I(si) = lg(1/P(si)) -> ile potrzeba bitów do optymalnego wyszukiwania (kodowania?) - jaka jest entropia
+ 
+ H = suma P(si)I(si) -- entropia
+ I(si) = log2(1/P(si)) -- miara informacji
+ **/
+
 #import <UIKit/UIKit.h>
 
 @interface TIiKAppDelegate : UIResponder <UIApplicationDelegate>
