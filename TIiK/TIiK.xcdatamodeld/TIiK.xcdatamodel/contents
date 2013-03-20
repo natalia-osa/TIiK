@@ -1,4 +1,20 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model name="Test1.xcdatamodel" userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="1" systemVersion="11A491" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
-    <elements/>
+<model name="" userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="2057" systemVersion="11G63" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
+    <entity name="File" representedClassName="File" syncable="YES">
+        <attribute name="fileName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="h" optional="YES" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="length" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <relationship name="letter" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Letter" inverseName="file" inverseEntity="Letter" syncable="YES"/>
+    </entity>
+    <entity name="Letter" representedClassName="Letter" syncable="YES">
+        <attribute name="i" optional="YES" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="letterName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="occurence" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <attribute name="p" optional="YES" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
+        <relationship name="file" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="File" inverseName="letter" inverseEntity="File" syncable="YES"/>
+    </entity>
+    <elements>
+        <element name="Letter" positionX="160" positionY="192" width="128" height="120"/>
+        <element name="File" positionX="376" positionY="198" width="128" height="105"/>
+    </elements>
 </model>

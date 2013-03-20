@@ -8,7 +8,21 @@
 
 #import "StringHelper.h"
 
+// data
+#import "TIiKAppDelegate.h"
+
+// models
+#import "Letter.h"
+#import "File.h"
+
+
 @implementation StringHelper
+
+- (void)emptyMethod {
+}
+
+
+#pragma mark - Resources
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 + (NSString*)allCharacterString {
@@ -21,12 +35,22 @@
     return [NSString stringWithContentsOfFile:path encoding:NSUTF8StringEncoding error:NULL];
 }
 
+
+#pragma mark - String operation
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-+ (void)iterateByString:(NSString*)inputString {
++ (void)iterateByString:(NSString*)inputString withName:(NSString*)inputName {
+    // getManagedObjectContext
+    TIiKAppDelegate *appDelegate = (TIiKAppDelegate *)[[UIApplication sharedApplication] delegate];
+    NSManagedObjectContext *context = [appDelegate managedObjectContext];
+    
     // wystąpienia w całości /// overall
     NSString *allCharacterString = [StringHelper allCharacterString];
     const char *c = [allCharacterString UTF8String];
     float H = 0;
+    
+    // zapis do DB
+    File *file = [StringHelper saveFileWithName:inputName withManagedObjectContext:context length:[inputString length] h:H];
     
     for(int i = 0; i < [allCharacterString length]; ++i) {
         // ilość wystąpień /// occurence
@@ -45,8 +69,11 @@
         if (P > 0.0f) {
             H += P*I;
         }
+        
+        [StringHelper saveLetterWithName:c[i] forFile:file withMangedObjectContext:context occurence:count p:P i:I];
     }
     NSLog(@"H = %f", H);
+    [StringHelper overwriteFile:file withManagedObjectContext:context h:H];
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -64,5 +91,55 @@
     }
     return count;
 }
+
+
+#pragma mark - Database operation
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
++ (File*)saveFileWithName:(NSString*)fileName withManagedObjectContext:(NSManagedObjectContext*)context length:(int)length h:(float)h {
+    File *file = [NSEntityDescription insertNewObjectForEntityForName:@"File" inManagedObjectContext:context];
+    file.fileName = fileName;
+    file.h = [NSNumber numberWithFloat:h];
+    file.length = [NSNumber numberWithInt:length];
+    
+    NSError *error;
+    if (![context save:&error]) {
+        NSLog(@"Couldn't save: %@", [error localizedDescription]);
+    }
+    
+    return file;
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
++ (void)overwriteFile:(File*)file withManagedObjectContext:(NSManagedObjectContext*)context h:(float)h {
+    file.h = [NSNumber numberWithFloat:h];
+    
+    NSError *error;
+    if (![context save:&error]) {
+        NSLog(@"Couldn't save: %@", [error localizedDescription]);
+    }
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
++ (void)saveLetterWithName:(char)letterName
+                   forFile:(File*)file
+   withMangedObjectContext:(NSManagedObjectContext*)context
+                 occurence:(int)occurence
+                         p:(float)p
+                         i:(float)i {
+    
+    Letter *letter = [NSEntityDescription insertNewObjectForEntityForName:@"Letter" inManagedObjectContext:context];
+    letter.letterName = [NSString stringWithFormat:@"%c", letterName];
+    letter.occurence = [NSNumber numberWithInt:occurence];
+    letter.p = [NSNumber numberWithFloat:p];
+    letter.i = [NSNumber numberWithFloat:i];
+    letter.file = file;
+    
+    NSError *error;
+    if (![context save:&error]) {
+        NSLog(@"Couldn't save: %@", [error localizedDescription]);
+    }
+}
+
 
 @end
