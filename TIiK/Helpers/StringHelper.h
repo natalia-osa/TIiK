@@ -11,7 +11,7 @@
 @interface StringHelper : NSObject
 
 + (int)getNumberOfOccurenceOfString:(NSString*)smallString inString:(NSString*)bigString;
-+ (void)iterateByString:(NSString*)inputString withName:(NSString*)inputName;
++ (void)iterateByString:(NSString*)inputString withName:(NSString*)inputName withManagedObjectContext:(NSManagedObjectContext*)context;
 + (NSString*)getStringFromFileNamed:(NSString*)name;
 + (NSString*)allCharacterString;
 

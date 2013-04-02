@@ -19,17 +19,24 @@
  
  ### Laboratoria 1 ###
  1. Przygotuj 3 pliki, przy czym każdy plik powinien zawierać przynajmniej 6000 znaków:
- 1.1. Litery w języku polskim,
- 1.2. Informatyczny w języku polskim,
- 1.3. Dowolny w j. angielskim.
+    1.1. Litery w języku polskim,
+    1.2. Informatyczny w języku polskim,
+    1.3. Dowolny w j. angielskim.
  2. Napisz program, który czyta plik tekstowy i wypisuje wszystkie występujące w nim znaki oraz wyznacza częstość ich występowania.
  3. Program mam wyznaczać też entropię binarną obliczonego rozkładu prawdopodobieństwa i wyznaczać ilość informacji w poszczególnych znakach.
  4. Wykonaj program dla trzech przygotowanych plików i porównaj wyniki.
  
- Wzór: I(si) = lg(1/P(si)) -> ile potrzeba bitów do optymalnego wyszukiwania (kodowania?) - jaka jest entropia
- 
+ Wzory:
  H = suma P(si)I(si) -- entropia
  I(si) = log2(1/P(si)) -- miara informacji
+ 
+ ### Laboratoria 2 ###
+ 1. Implementacja kompresji metodą Hoffmana (statyczna)
+    1.1. Kodowanie - w porównaniu z miarą entropii widać jak dobre jest kodowanie
+    1.2. Dekodowanie - potrzebna informacja jakie znaki jak są kodowane
+ 
+ Wzory:
+ ???
  **/
 
 #import <UIKit/UIKit.h>

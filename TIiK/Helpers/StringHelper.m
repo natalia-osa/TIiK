@@ -39,10 +39,7 @@
 #pragma mark - String operation
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-+ (void)iterateByString:(NSString*)inputString withName:(NSString*)inputName {
-    // getManagedObjectContext
-    TIiKAppDelegate *appDelegate = (TIiKAppDelegate *)[[UIApplication sharedApplication] delegate];
-    NSManagedObjectContext *context = [appDelegate managedObjectContext];
++ (void)iterateByString:(NSString*)inputString withName:(NSString*)inputName withManagedObjectContext:(NSManagedObjectContext*)context {
     
     // wystąpienia w całości /// overall
     NSString *allCharacterString = [StringHelper allCharacterString];
