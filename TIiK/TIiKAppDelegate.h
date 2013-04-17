@@ -36,7 +36,14 @@
     1.2. Dekodowanie - potrzebna informacja jakie znaki jak są kodowane
  
  Wzory:
- ???
+ http://www.algorytm.org/algorytmy-kompresji/kody-huffmana.html
+ 
+ 
+ ### Labrotoria 3 ###
+ 1. Kodowanie arytmetyczne
+ 
+ Wzory:
+ 
  **/
 
 #import <UIKit/UIKit.h>
