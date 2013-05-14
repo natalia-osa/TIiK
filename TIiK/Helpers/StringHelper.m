@@ -35,6 +35,17 @@
     return [NSString stringWithContentsOfFile:path encoding:NSUTF8StringEncoding error:NULL];
 }
 
+////////////////////////////////////////////////////////////////////////////////////////////////////
++ (void)saveString:(NSString*)inputString toFileNamed:(NSString*)fileName {
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *documentsDirectory = [paths objectAtIndex:0]; // Get documents directory
+    NSError *error;
+    BOOL succeed = [inputString writeToFile:[documentsDirectory stringByAppendingPathComponent:fileName]
+                                 atomically:YES encoding:NSUTF8StringEncoding error:&error];
+    if (!succeed){
+        NSLog(@"%@", error.localizedDescription);
+    }
+}
 
 #pragma mark - String operation
 
@@ -71,6 +82,11 @@
     }
     NSLog(@"H = %f", H);
     [StringHelper overwriteFile:file withManagedObjectContext:context h:H];
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
++ (void)countEntropy {
+    
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////

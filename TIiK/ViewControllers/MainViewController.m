@@ -10,6 +10,7 @@
 
 // helpers
 #import "StringHelper.h"
+#import "HuffmanHelper.h"
 
 // frameworks
 #import <math.h>
@@ -54,198 +55,7 @@
     [super viewWillLayoutSubviews];
 }
 
-
-#pragma mark - Load data
-
-////////////////////////////////////////////////////////////////////////////////////////////////////
-- (void)loadDatabaseDataForFileAtIndex:(NSUInteger)fileIndex {
-    NSLog(@"In file: %@", [(File*)[_files objectAtIndex:fileIndex] fileName]);
-    
-    // load letters
-    NSFetchRequest *letterFetch = [[NSFetchRequest alloc] init];
-    [letterFetch setEntity:[NSEntityDescription entityForName:@"Letter" inManagedObjectContext:__managedObjectContext]];
-    [letterFetch setPredicate:[NSPredicate predicateWithFormat:@"file == %@", [_files objectAtIndex:fileIndex]]];
-    [letterFetch setSortDescriptors:@[[[NSSortDescriptor alloc] initWithKey:@"occurence" ascending:YES]]];
-    NSArray *letters = [__managedObjectContext executeFetchRequest:letterFetch error:nil];
-    
-    NSMutableArray *unusedLeafs = [[NSMutableArray alloc] init];
-    for (Letter *letter in letters) {
-        NSLog(@"occurence of %@ is %d", letter.letterName, letter.occurence.intValue);
-        
-        // create leafs of tree
-        if ([letter.occurence integerValue] > 0) {
-            // only if letter apprears in text
-            HuffmannTreeLeaf *leaf = [[HuffmannTreeLeaf alloc] init];
-            [leaf setF:[letter.occurence integerValue]];
-            [leaf setLetterName:letter.letterName];
-            [unusedLeafs addObject:leaf];
-        }
-    }
-
-    // create table of codes
-    NSMutableArray *usedLeafs = [[NSMutableArray alloc] init];
-    
-    HuffmannTreeLeaf *parentLeaf;
-    HuffmannTreeLeaf *topLeaf;
-    while ([unusedLeafs count] > 0) {
-        // keep list sorted
-        [unusedLeafs sortUsingDescriptors:@[[[NSSortDescriptor alloc] initWithKey:@"f" ascending:YES]]];
-        if (parentLeaf == nil) {
-            parentLeaf = [[HuffmannTreeLeaf alloc] init];
-            [parentLeaf setLetterName:@""];
-            [parentLeaf setF:0];
-        }
-        
-        // set leafs
-        HuffmannTreeLeaf *currentLeaf = [unusedLeafs objectAtIndex:0];
-        [parentLeaf setF:(parentLeaf.f + currentLeaf.f)];
-        // set left
-        if (parentLeaf.leftLeaf == nil) {
-            // add code
-            [parentLeaf setLetterName:[NSString stringWithFormat:@"%@%@", parentLeaf.letterName, currentLeaf.letterName]];
-            // move current leaf to used
-            [usedLeafs addObject:currentLeaf];
-            [parentLeaf setLeftLeaf:currentLeaf];
-            [unusedLeafs removeObject:currentLeaf];
-        // if left already is, set right
-        } else if (parentLeaf.rightLeaf == nil) {
-            // add code
-            [parentLeaf setLetterName:[NSString stringWithFormat:@"%@%@", currentLeaf.letterName, parentLeaf.letterName]];
-            // move current leaf to used
-            [usedLeafs addObject:currentLeaf];
-            [parentLeaf setRightLeaf:currentLeaf];
-            [unusedLeafs removeObject:currentLeaf];
-            // add parentLeaf to unused
-            [unusedLeafs addObject:parentLeaf];
-            parentLeaf = nil;
-        }
-        // save reference to top leaf
-        if ([unusedLeafs count] == 0) {
-            topLeaf = currentLeaf;
-        }
-    }
-    
-    NSLog(@" ");NSLog(@" ");
-    
-    // read codes
-    huffmanCodes = [[NSMutableArray alloc] init];
-    [self readChildLeafOf:topLeaf withSuperCode:@""];
-    
-    // show codes
-    for (HuffmanCode *huffmanCode in huffmanCodes) {
-        NSLog(@"H: %@, %@", huffmanCode.code, huffmanCode.sign);
-    }
-    
-    NSLog(@" ");
-    NSLog(@" ");
-
-    // show leafs and their occurence
-//    for (HuffmannTreeLeaf *leaf in usedLeafs) {
-//        NSLog(@"%@ - %d",leaf.letterName, leaf.f);
-//    }
-    
-    // encode
-    NSString *plainText = [StringHelper getStringFromFileNamed:[(File*)[_files objectAtIndex:fileIndex] fileName]];
-    NSString *encodedString = @"";
-    
-    // for each sign
-    unichar *buffer = calloc([plainText length], sizeof(unichar));
-    [plainText getCharacters:buffer];
-    
-    for(NSUInteger i = 0; i < [plainText length]; i++) {
-        // search for code
-        for (HuffmanCode *huffmanCode in huffmanCodes) {
-            if ([huffmanCode.sign isEqualToString:[NSString stringWithFormat:@"%c", buffer[i]]]) {
-                // add the code to encoded string
-                encodedString = [NSString stringWithFormat:@"%@%@", encodedString, huffmanCode.code];
-                break;
-            }
-//            if ([huffmanCode isEqual:[huffmanCodes lastObject]]) {
-//                encodedString = [NSString stringWithFormat:@"%@%@", encodedString, [NSString stringWithUTF8String:buffer[i]/*&c[i]*/]];
-//                break;
-//            }
-        }
-    }
-    NSLog(@" ");NSLog(@" ");
-    
-    // save to file
-    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    NSString *documentsDirectory = [paths objectAtIndex:0]; // Get documents directory
-    NSError *error;
-    BOOL succeed = [encodedString writeToFile:[documentsDirectory stringByAppendingPathComponent:@"encoded"]
-                              atomically:YES encoding:NSUTF8StringEncoding error:&error];
-    if (!succeed){
-        NSLog(@"%@", error.localizedDescription);
-    }
-    
-    // save hoffman codes to files
-    NSString *huffmanCodesString = @"";
-    for (HuffmanCode *huffmanCode in huffmanCodes) {
-        huffmanCodesString = [NSString stringWithFormat:@"%@%@ %@\n", huffmanCodesString, huffmanCode.code, huffmanCode.sign];
-    }
-    succeed = [huffmanCodesString writeToFile:[documentsDirectory stringByAppendingPathComponent:@"code"]
-                                   atomically:YES encoding:NSUTF8StringEncoding error:&error];
-    if (!succeed){
-        NSLog(@"%@", error.localizedDescription);
-    }
-    
-    
-    // decode
-    NSString *decodedString = @"";
-    
-    // for each sign
-    const char *d = [encodedString UTF8String];
-    NSString *unknownSign = @"";
-    for(int i = 0; i < [encodedString length]; ++i) {
-        unknownSign = [NSString stringWithFormat:@"%@%c", unknownSign, d[i]];
-//        if (d[i] != '0' || d[i] != '1') {
-//            decodedString = [NSString stringWithFormat:@"%@%c", decodedString, d[i]];
-//            unknownSign = @"";
-//        }
-        NSString *compareResult = [self compareHuffmanCodesToString:unknownSign];
-        if (![compareResult isEqualToString:@""]) {
-            decodedString = [NSString stringWithFormat:@"%@%@", decodedString, compareResult];
-            unknownSign = @"";
-        }
-    }
-    
-    // save to file
-    succeed = [decodedString writeToFile:[documentsDirectory stringByAppendingPathComponent:@"decoded"]
-                                   atomically:YES encoding:NSUTF8StringEncoding error:&error];
-    if (!succeed){
-        NSLog(@"%@", error.localizedDescription);
-    }
-}
-
-////////////////////////////////////////////////////////////////////////////////////////////////////
-- (NSString*)compareHuffmanCodesToString:(NSString*)inputString {
-    for (HuffmanCode *huffmanCode in huffmanCodes) {
-        if ([huffmanCode.code isEqualToString:inputString]) {
-            return huffmanCode.sign;
-        }
-    }
-    // if didn't find return nothing
-    return @"";
-}
-
-////////////////////////////////////////////////////////////////////////////////////////////////////
-- (void)readChildLeafOf:(HuffmannTreeLeaf *)parentLeaf withSuperCode:(NSString *)superCode {
-    if (parentLeaf.leftLeaf) {
-        [self readChildLeafOf:parentLeaf.leftLeaf withSuperCode:[NSString stringWithFormat:@"%@0", superCode]];
-    }
-    if (parentLeaf.rightLeaf) {
-        [self readChildLeafOf:parentLeaf.rightLeaf withSuperCode:[NSString stringWithFormat:@"%@1", superCode]];
-    }
-    if (!parentLeaf.rightLeaf && !parentLeaf.leftLeaf) { // there is no child
-        HuffmanCode *currentCode = [[HuffmanCode alloc] init];
-        [currentCode setCode:superCode];
-        [currentCode setSign:parentLeaf.letterName];
-        [huffmanCodes addObject:currentCode];
-    }
-}
-
-
-#pragma mark - Adding records
+#pragma mark - Calculations
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 - (void)setupDatabase {
@@ -268,6 +78,13 @@
         [userDefaults setBool:YES forKey:@"hasRunBefore"];
         [userDefaults synchronize];
     }
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+- (void)encodeDecodeWithHuffmanForFileNumber:(NSUInteger)fileNumber {
+    HuffmanHelper *huffmanHelper = [[HuffmanHelper alloc] init];
+    [huffmanHelper setManagedObjectContext:__managedObjectContext];
+    [huffmanHelper encodeDecodeWithFileNumber:fileNumber files:_files];
 }
 
 
@@ -337,13 +154,13 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     switch (indexPath.row) {
         case 0:
-            [self loadDatabaseDataForFileAtIndex:0];
+            [self encodeDecodeWithHuffmanForFileNumber:0];
             break;
         case 1:
-            [self loadDatabaseDataForFileAtIndex:1];
+            [self encodeDecodeWithHuffmanForFileNumber:1];
             break;
         case 2:
-            [self loadDatabaseDataForFileAtIndex:2];
+            [self encodeDecodeWithHuffmanForFileNumber:2];
             break;
         default:
             break;

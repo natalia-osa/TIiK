@@ -9,8 +9,6 @@
 #import <UIKit/UIKit.h>
 #import "Letter.h"
 #import "File.h"
-#import "HuffmannTreeLeaf.h"
-#import "HuffmanCode.h"
 
 @interface MainViewController : UITableViewController {
     NSString *_polString;
@@ -18,8 +16,6 @@
     NSString *_infString;
     
     NSArray *_files;
-    
-    NSMutableArray *huffmanCodes;
 }
 
 @property (nonatomic, retain) NSManagedObjectContext *managedObjectContext;

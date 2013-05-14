@@ -5,6 +5,7 @@
 //  Created by Natalia Osiecka on 19.03.2013.
 //  Copyright (c) 2013 Politechnika Poznańska. All rights reserved.
 //
+//  https://github.com/natalia-osa/TIiK/
 
 /** Teoria informacji i kodowania *** Idzikowska ***
  
@@ -40,7 +41,10 @@
  
  
  ### Labrotoria 3 ###
- 1. Kodowanie arytmetyczne
+ Kodowanie arytmetyczne
+ 
+ ### Laboratoria 4 ###
+ Metoda LZW
  
  Wzory:
  

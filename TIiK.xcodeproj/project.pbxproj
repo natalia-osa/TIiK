@@ -12,7 +12,11 @@
 		6447042716F92A4F00BB1A99 /* StringHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 6447042616F92A4F00BB1A99 /* StringHelper.m */; };
 		6447043C16F92F5E00BB1A99 /* Letter.m in Sources */ = {isa = PBXBuildFile; fileRef = 6447043B16F92F5E00BB1A99 /* Letter.m */; };
 		6447043F16F9358E00BB1A99 /* File.m in Sources */ = {isa = PBXBuildFile; fileRef = 6447043E16F9358E00BB1A99 /* File.m */; };
-		64DADC25170BA4C0009A0DAE /* HuffmannTreeLeaf.m in Sources */ = {isa = PBXBuildFile; fileRef = 64DADC24170BA4C0009A0DAE /* HuffmannTreeLeaf.m */; };
+		647E37DD171EADD400BF331F /* HuffmanHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 647E37DC171EADD400BF331F /* HuffmanHelper.m */; };
+		647E37E1171EAE1B00BF331F /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 647E37DE171EAE1B00BF331F /* Default-568h@2x.png */; };
+		647E37E2171EAE1B00BF331F /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 647E37DF171EAE1B00BF331F /* Default.png */; };
+		647E37E3171EAE1B00BF331F /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 647E37E0171EAE1B00BF331F /* Default@2x.png */; };
+		647E37E6171EB30900BF331F /* HuffmannTreeLeaf.m in Sources */ = {isa = PBXBuildFile; fileRef = 647E37E5171EB30900BF331F /* HuffmannTreeLeaf.m */; };
 		64ED5EB516F8E85E003F0203 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 64ED5EB416F8E85E003F0203 /* UIKit.framework */; };
 		64ED5EB716F8E85E003F0203 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 64ED5EB616F8E85E003F0203 /* Foundation.framework */; };
 		64ED5EB916F8E85E003F0203 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 64ED5EB816F8E85E003F0203 /* CoreGraphics.framework */; };
@@ -20,9 +24,6 @@
 		64ED5EC116F8E85E003F0203 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 64ED5EBF16F8E85E003F0203 /* InfoPlist.strings */; };
 		64ED5EC316F8E85E003F0203 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 64ED5EC216F8E85E003F0203 /* main.m */; };
 		64ED5EC716F8E85E003F0203 /* TIiKAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 64ED5EC616F8E85E003F0203 /* TIiKAppDelegate.m */; };
-		64ED5EC916F8E85E003F0203 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 64ED5EC816F8E85E003F0203 /* Default.png */; };
-		64ED5ECB16F8E85E003F0203 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 64ED5ECA16F8E85E003F0203 /* Default@2x.png */; };
-		64ED5ECD16F8E85E003F0203 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 64ED5ECC16F8E85E003F0203 /* Default-568h@2x.png */; };
 		64ED5ED016F8E85E003F0203 /* TIiK.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 64ED5ECE16F8E85E003F0203 /* TIiK.xcdatamodeld */; };
 		64ED5EDA16F8E962003F0203 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 64ED5ED916F8E962003F0203 /* MainViewController.m */; };
 		64ED5EDC16F8EAF5003F0203 /* Eng.txt in Resources */ = {isa = PBXBuildFile; fileRef = 64ED5EDB16F8EAF5003F0203 /* Eng.txt */; };
@@ -38,8 +39,13 @@
 		6447043B16F92F5E00BB1A99 /* Letter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Letter.m; path = Models/Letter.m; sourceTree = "<group>"; };
 		6447043D16F9358E00BB1A99 /* File.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = File.h; path = Models/File.h; sourceTree = "<group>"; };
 		6447043E16F9358E00BB1A99 /* File.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = File.m; path = Models/File.m; sourceTree = "<group>"; };
+		647E37DB171EADD400BF331F /* HuffmanHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HuffmanHelper.h; path = Helpers/HuffmanHelper.h; sourceTree = "<group>"; };
+		647E37DC171EADD400BF331F /* HuffmanHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HuffmanHelper.m; path = Helpers/HuffmanHelper.m; sourceTree = "<group>"; };
+		647E37DE171EAE1B00BF331F /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default-568h@2x.png"; path = "Resources/Default-568h@2x.png"; sourceTree = SOURCE_ROOT; };
+		647E37DF171EAE1B00BF331F /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Default.png; path = Resources/Default.png; sourceTree = SOURCE_ROOT; };
+		647E37E0171EAE1B00BF331F /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default@2x.png"; path = "Resources/Default@2x.png"; sourceTree = SOURCE_ROOT; };
+		647E37E5171EB30900BF331F /* HuffmannTreeLeaf.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HuffmannTreeLeaf.m; path = Models/HuffmannTreeLeaf.m; sourceTree = "<group>"; };
 		64DADC23170BA4C0009A0DAE /* HuffmannTreeLeaf.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HuffmannTreeLeaf.h; path = Models/HuffmannTreeLeaf.h; sourceTree = "<group>"; };
-		64DADC24170BA4C0009A0DAE /* HuffmannTreeLeaf.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HuffmannTreeLeaf.m; path = Models/HuffmannTreeLeaf.m; sourceTree = "<group>"; };
 		64ED5EB116F8E85E003F0203 /* TIiK.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TIiK.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		64ED5EB416F8E85E003F0203 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		64ED5EB616F8E85E003F0203 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -51,9 +57,6 @@
 		64ED5EC416F8E85E003F0203 /* TIiK-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "TIiK-Prefix.pch"; sourceTree = "<group>"; };
 		64ED5EC516F8E85E003F0203 /* TIiKAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TIiKAppDelegate.h; sourceTree = "<group>"; };
 		64ED5EC616F8E85E003F0203 /* TIiKAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TIiKAppDelegate.m; sourceTree = "<group>"; };
-		64ED5EC816F8E85E003F0203 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
-		64ED5ECA16F8E85E003F0203 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
-		64ED5ECC16F8E85E003F0203 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		64ED5ECF16F8E85E003F0203 /* TIiK.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = TIiK.xcdatamodel; sourceTree = "<group>"; };
 		64ED5ED816F8E962003F0203 /* MainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MainViewController.h; path = ViewControllers/MainViewController.h; sourceTree = "<group>"; };
 		64ED5ED916F8E962003F0203 /* MainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MainViewController.m; path = ViewControllers/MainViewController.m; sourceTree = "<group>"; };
@@ -77,6 +80,26 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		647E37DA171EADAC00BF331F /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				647E37DB171EADD400BF331F /* HuffmanHelper.h */,
+				647E37DC171EADD400BF331F /* HuffmanHelper.m */,
+				6447042516F92A4F00BB1A99 /* StringHelper.h */,
+				6447042616F92A4F00BB1A99 /* StringHelper.m */,
+			);
+			name = Helpers;
+			sourceTree = "<group>";
+		};
+		647E37E4171EAE3500BF331F /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				64ED5ED816F8E962003F0203 /* MainViewController.h */,
+				64ED5ED916F8E962003F0203 /* MainViewController.m */,
+			);
+			name = ViewControllers;
+			sourceTree = "<group>";
+		};
 		64ED5EA816F8E85E003F0203 = {
 			isa = PBXGroup;
 			children = (
@@ -113,10 +136,8 @@
 			children = (
 				64ED5EC516F8E85E003F0203 /* TIiKAppDelegate.h */,
 				64ED5EC616F8E85E003F0203 /* TIiKAppDelegate.m */,
-				64ED5ED816F8E962003F0203 /* MainViewController.h */,
-				64ED5ED916F8E962003F0203 /* MainViewController.m */,
-				6447042516F92A4F00BB1A99 /* StringHelper.h */,
-				6447042616F92A4F00BB1A99 /* StringHelper.m */,
+				647E37DA171EADAC00BF331F /* Helpers */,
+				647E37E4171EAE3500BF331F /* ViewControllers */,
 			);
 			name = Classes;
 			path = TIiK;
@@ -125,13 +146,13 @@
 		64ED5EBD16F8E85E003F0203 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				647E37DE171EAE1B00BF331F /* Default-568h@2x.png */,
+				647E37DF171EAE1B00BF331F /* Default.png */,
+				647E37E0171EAE1B00BF331F /* Default@2x.png */,
 				64ED5EBE16F8E85E003F0203 /* TIiK-Info.plist */,
 				64ED5EBF16F8E85E003F0203 /* InfoPlist.strings */,
 				64ED5EC216F8E85E003F0203 /* main.m */,
 				64ED5EC416F8E85E003F0203 /* TIiK-Prefix.pch */,
-				64ED5EC816F8E85E003F0203 /* Default.png */,
-				64ED5ECA16F8E85E003F0203 /* Default@2x.png */,
-				64ED5ECC16F8E85E003F0203 /* Default-568h@2x.png */,
 			);
 			name = "Supporting Files";
 			path = TIiK;
@@ -146,7 +167,7 @@
 				6447043A16F92F5E00BB1A99 /* Letter.h */,
 				6447043B16F92F5E00BB1A99 /* Letter.m */,
 				64DADC23170BA4C0009A0DAE /* HuffmannTreeLeaf.h */,
-				64DADC24170BA4C0009A0DAE /* HuffmannTreeLeaf.m */,
+				647E37E5171EB30900BF331F /* HuffmannTreeLeaf.m */,
 				64F96520171DE20F00C9084B /* HuffmanCode.h */,
 				64F96521171DE20F00C9084B /* HuffmanCode.m */,
 			);
@@ -217,12 +238,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				64ED5EC116F8E85E003F0203 /* InfoPlist.strings in Resources */,
-				64ED5EC916F8E85E003F0203 /* Default.png in Resources */,
-				64ED5ECB16F8E85E003F0203 /* Default@2x.png in Resources */,
-				64ED5ECD16F8E85E003F0203 /* Default-568h@2x.png in Resources */,
 				64ED5EDC16F8EAF5003F0203 /* Eng.txt in Resources */,
 				6447042216F8EC3300BB1A99 /* Pol.txt in Resources */,
 				6447042416F8EEE500BB1A99 /* Inf.txt in Resources */,
+				647E37E1171EAE1B00BF331F /* Default-568h@2x.png in Resources */,
+				647E37E2171EAE1B00BF331F /* Default.png in Resources */,
+				647E37E3171EAE1B00BF331F /* Default@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -240,8 +261,9 @@
 				6447042716F92A4F00BB1A99 /* StringHelper.m in Sources */,
 				6447043C16F92F5E00BB1A99 /* Letter.m in Sources */,
 				6447043F16F9358E00BB1A99 /* File.m in Sources */,
-				64DADC25170BA4C0009A0DAE /* HuffmannTreeLeaf.m in Sources */,
 				64F96522171DE21000C9084B /* HuffmanCode.m in Sources */,
+				647E37DD171EADD400BF331F /* HuffmanHelper.m in Sources */,
+				647E37E6171EB30900BF331F /* HuffmannTreeLeaf.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

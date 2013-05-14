@@ -14,7 +14,7 @@
         <relationship name="file" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="File" inverseName="letter" inverseEntity="File" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Letter" positionX="160" positionY="192" width="128" height="120"/>
-        <element name="File" positionX="376" positionY="198" width="128" height="105"/>
+        <element name="File" positionX="378" positionY="180" width="128" height="105"/>
+        <element name="Letter" positionX="135" positionY="153" width="128" height="120"/>
     </elements>
 </model>

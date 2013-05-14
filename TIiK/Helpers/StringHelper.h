@@ -10,9 +10,12 @@
 
 @interface StringHelper : NSObject
 
+// documents folder
++ (NSString*)getStringFromFileNamed:(NSString*)name;
++ (void)saveString:(NSString*)inputString toFileNamed:(NSString*)fileName;
+// string operations
 + (int)getNumberOfOccurenceOfString:(NSString*)smallString inString:(NSString*)bigString;
 + (void)iterateByString:(NSString*)inputString withName:(NSString*)inputName withManagedObjectContext:(NSManagedObjectContext*)context;
-+ (NSString*)getStringFromFileNamed:(NSString*)name;
 + (NSString*)allCharacterString;
 
 @end
