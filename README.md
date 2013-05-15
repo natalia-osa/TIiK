@@ -1,10 +1,11 @@
-TIiK
+Information and coding theory
 ====
 
-Information and coding theory
+Copyright (c) 2013 Politechnika Poznańska
 
 ===
 
-1. Counting occurences of signs in attached files to sqlite
-2. Huffman encode / decode to file
-3. Arithmetic coding
+1. Counting Entropy, NSString operations, support for file & DB approach
+2. Hoffman compression (encode / decode)
+3. Arithmetic coding -- currently undone
+4. LZW compression (Lempel–Ziv–Welch) (encode / decode)
