@@ -11,6 +11,7 @@
 // helpers
 #import "StringHelper.h"
 #import "HuffmanHelper.h"
+#import "LZWHelper.h"
 
 // frameworks
 #import <math.h>
@@ -21,6 +22,9 @@
 
 @implementation MainViewController
 @synthesize managedObjectContext = __managedObjectContext;
+
+#warning add 'detail' screens - show table & files for just calculated option - detail would be file contents
+#warning add Constants file & save Models name there
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 - (id)init {
@@ -42,6 +46,9 @@
     [fileFetch setEntity:[NSEntityDescription entityForName:@"File" inManagedObjectContext:__managedObjectContext]];
     [fileFetch setSortDescriptors:@[[[NSSortDescriptor alloc] initWithKey:@"fileName" ascending:YES]]];
     
+    UIBarButtonItem *clearBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:self action:@selector(clearDatabaseTapped:)];
+    self.navigationItem.rightBarButtonItem = clearBarButtonItem;
+    
     _files = [__managedObjectContext executeFetchRequest:fileFetch error:nil];
 }
 
@@ -55,7 +62,35 @@
     [super viewWillLayoutSubviews];
 }
 
+#pragma mark - Actions
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+- (IBAction)clearDatabaseTapped:(id)sender {
+    [self clearEntityNamed:@"File"];
+    [self clearEntityNamed:@"Letter"];
+    
+    [self setupDatabase];
+}
+
 #pragma mark - Calculations
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+- (void)clearEntityNamed:(NSString*)entityName {
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    [fetchRequest setEntity:[NSEntityDescription entityForName:entityName inManagedObjectContext:__managedObjectContext]];
+    [fetchRequest setIncludesPropertyValues:NO]; //only fetch the managedObjectID
+    
+    NSError *error = nil;
+    NSArray *objects = [__managedObjectContext executeFetchRequest:fetchRequest error:&error];
+    if (error) NSLog(@"%@", error.localizedDescription);
+    
+    for (NSManagedObject *object in objects) {
+        [__managedObjectContext deleteObject:object];
+    }
+    NSError *saveError = nil;
+    [__managedObjectContext save:&saveError];
+    if (saveError) NSLog(@"%@", saveError.localizedDescription);
+}
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 - (void)setupDatabase {
@@ -87,18 +122,28 @@
     [huffmanHelper encodeDecodeWithFileNumber:fileNumber files:_files];
 }
 
+////////////////////////////////////////////////////////////////////////////////////////////////////
+- (void)encodeDecodeWithLZWForFileNumber:(NSUInteger)fileNumber {
+    LZWHelper *lzwHelper = [[LZWHelper alloc] init];
+    [lzwHelper setManagedObjectContext:__managedObjectContext];
+    [lzwHelper encodeDecodeWithFileNumber:fileNumber files:_files];
+}
+
 
 #pragma mark - UITableView delegate & datasource
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 1;
+    return 2;
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     switch (section) {
-        case 0:
+        case 0: // hoffman
+            return 3;
+            break;
+        case 1: // lzw
             return 3;
             break;
         default:
@@ -112,6 +157,9 @@
     switch (section) {
         case 0:
             return NSLocalizedString(@"Huffman - encode & decode", nil);
+            break;
+        case 1:
+            return NSLocalizedString(@"LZW", nil);
             break;
         default:
             return @"";
@@ -152,16 +200,45 @@
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    switch (indexPath.row) {
-        case 0:
-            [self encodeDecodeWithHuffmanForFileNumber:0];
+    switch (indexPath.section) {
+        case 0: { // hoffman
+            switch (indexPath.row) {
+                case 0: {
+                    [self encodeDecodeWithHuffmanForFileNumber:0];
+                    break;
+                }
+                case 1: {
+                    [self encodeDecodeWithHuffmanForFileNumber:1];
+                    break;
+                }
+                case 2: {
+                    [self encodeDecodeWithHuffmanForFileNumber:2];
+                    break;
+                }
+                default:
+                    break;
+            }
             break;
-        case 1:
-            [self encodeDecodeWithHuffmanForFileNumber:1];
+        }
+        case 1: { // lzw
+            switch (indexPath.row) {
+                case 0: {
+                    [self encodeDecodeWithLZWForFileNumber:0];
+                    break;
+                }
+                case 1: {
+                    [self encodeDecodeWithLZWForFileNumber:1];
+                    break;
+                }
+                case 2: {
+                    [self encodeDecodeWithLZWForFileNumber:2];
+                    break;
+                }
+                default:
+                    break;
+            }
             break;
-        case 2:
-            [self encodeDecodeWithHuffmanForFileNumber:2];
-            break;
+        }
         default:
             break;
     }

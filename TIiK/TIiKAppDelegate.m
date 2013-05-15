@@ -21,8 +21,12 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     self.window.backgroundColor = [UIColor whiteColor];
-    [self.window setRootViewController:[[MainViewController alloc] init]];
-    [(MainViewController*)self.window.rootViewController setManagedObjectContext:[self managedObjectContext]];
+    
+    MainViewController *mainViewController = [[MainViewController alloc] init];
+    UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:mainViewController];
+    [self.window setRootViewController:navigationController];
+    [mainViewController setManagedObjectContext:[self managedObjectContext]];
+    
     [self.window makeKeyAndVisible];
     
     return YES;

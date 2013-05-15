@@ -59,7 +59,7 @@
                                                        delegate:self
                                               cancelButtonTitle:@"OK"
                                               otherButtonTitles:nil];
-    [alertView show]
+    [alertView show];
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
