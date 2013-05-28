@@ -5,16 +5,26 @@
 //  Created by Natalia Osiecka on 19.03.2013.
 //  Copyright (c) 2013 Politechnika Poznańska. All rights reserved.
 //
+//  INFO: These methods support only UTF-8 signs
 
 #import "MainViewController.h"
+
+// constants
+#import "TIiKConstants.h"
 
 // helpers
 #import "StringHelper.h"
 #import "HuffmanHelper.h"
 #import "LZWHelper.h"
+#import "CRCHelper.h"
 
 // frameworks
 #import <math.h>
+
+// constants
+#define KENG @"Eng"
+#define KPOL @"Pol"
+#define KINF @"Inf"
 
 @interface MainViewController ()
 
@@ -24,7 +34,6 @@
 @synthesize managedObjectContext = __managedObjectContext;
 
 #warning add 'detail' screens - show table & files for just calculated option - detail would be file contents
-#warning add Constants file & save Models name there
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 - (id)init {
@@ -43,8 +52,8 @@
     
     // load files
     NSFetchRequest *fileFetch = [[NSFetchRequest alloc] init];
-    [fileFetch setEntity:[NSEntityDescription entityForName:@"File" inManagedObjectContext:__managedObjectContext]];
-    [fileFetch setSortDescriptors:@[[[NSSortDescriptor alloc] initWithKey:@"fileName" ascending:YES]]];
+    [fileFetch setEntity:[NSEntityDescription entityForName:kFile inManagedObjectContext:__managedObjectContext]];
+    [fileFetch setSortDescriptors:@[[[NSSortDescriptor alloc] initWithKey:kFileName ascending:YES]]];
     
     UIBarButtonItem *clearBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:self action:@selector(clearDatabaseTapped:)];
     self.navigationItem.rightBarButtonItem = clearBarButtonItem;
@@ -66,9 +75,13 @@
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 - (IBAction)clearDatabaseTapped:(id)sender {
-    [self clearEntityNamed:@"File"];
-    [self clearEntityNamed:@"Letter"];
+    [self clearEntityNamed:kFile];
+    [self clearEntityNamed:kLetter];
     
+    // save to run only once
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    [userDefaults setBool:NO forKey:kHasRunBefore];
+    [userDefaults synchronize];
     [self setupDatabase];
 }
 
@@ -96,21 +109,21 @@
 - (void)setupDatabase {
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
     // run only once
-    if (![userDefaults boolForKey:@"hasRunBefore"]) {
-        _engString = [StringHelper getStringFromFileNamed:@"Eng"];
+    if (![userDefaults boolForKey:kHasRunBefore]) {
+        _engString = [StringHelper getStringFromFileNamed:KENG];
         NSLog(@"Eng Length: %d", [_engString length]);
-        [StringHelper iterateByString:_engString withName:@"Eng" withManagedObjectContext:__managedObjectContext];
+        [StringHelper iterateByString:_engString withName:KENG withManagedObjectContext:__managedObjectContext];
         
-        _polString = [StringHelper getStringFromFileNamed:@"Pol"];
+        _polString = [StringHelper getStringFromFileNamed:KPOL];
         NSLog(@"Pol Length: %d", [_polString length]);
-        [StringHelper iterateByString:_polString withName:@"Pol" withManagedObjectContext:__managedObjectContext];
+        [StringHelper iterateByString:_polString withName:KPOL withManagedObjectContext:__managedObjectContext];
         
-        _infString = [StringHelper getStringFromFileNamed:@"Inf"];
+        _infString = [StringHelper getStringFromFileNamed:KINF];
         NSLog(@"Inf Length: %d", [_infString length]);
-        [StringHelper iterateByString:_infString withName:@"Inf" withManagedObjectContext:__managedObjectContext];
+        [StringHelper iterateByString:_infString withName:KINF withManagedObjectContext:__managedObjectContext];
         
         // save to run only once
-        [userDefaults setBool:YES forKey:@"hasRunBefore"];
+        [userDefaults setBool:YES forKey:kHasRunBefore];
         [userDefaults synchronize];
     }
 }
@@ -129,12 +142,18 @@
     [lzwHelper encodeDecodeWithFileNumber:fileNumber files:_files];
 }
 
+////////////////////////////////////////////////////////////////////////////////////////////////////
+- (void)calculateCrcForFileNumber:(NSUInteger)fileNumber {
+    CRCHelper *crcHelper = [[CRCHelper alloc] init];
+    [crcHelper crcData];
+}
+
 
 #pragma mark - UITableView delegate & datasource
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 2;
+    return 3;
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -146,7 +165,7 @@
         case 1: // lzw
             return 3;
             break;
-        default:
+        default: // crc
             return 1;
             break;
     }
@@ -160,6 +179,9 @@
             break;
         case 1:
             return NSLocalizedString(@"LZW", nil);
+            break;
+        case 2:
+            return NSLocalizedString(@"CRC", nil);
             break;
         default:
             return @"";
@@ -179,20 +201,26 @@
     if (!cell) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellId];
     }
-    
-    switch (indexPath.row) {
-        case 0: {
-            [cell.textLabel setText:[NSString stringWithFormat:NSLocalizedString(@"File %@", nil), [(File*)[_files objectAtIndex:0] fileName]]];
+    switch (indexPath.section) {
+        case 2: // crc
+            [cell.textLabel setText:[NSString stringWithFormat:NSLocalizedString(@"Show CRC & check its correctness", nil), [(File*)[_files objectAtIndex:0] fileName]]];
             break;
-        } case 1: {
-            [cell.textLabel setText:[NSString stringWithFormat:NSLocalizedString(@"File %@", nil), [(File*)[_files objectAtIndex:1] fileName]]];
+        default: // all others
+            switch (indexPath.row) {
+                case 0: {
+                    [cell.textLabel setText:[NSString stringWithFormat:NSLocalizedString(@"File %@", nil), [(File*)[_files objectAtIndex:0] fileName]]];
+                    break;
+                } case 1: {
+                    [cell.textLabel setText:[NSString stringWithFormat:NSLocalizedString(@"File %@", nil), [(File*)[_files objectAtIndex:1] fileName]]];
+                    break;
+                } case 2: {
+                    [cell.textLabel setText:[NSString stringWithFormat:NSLocalizedString(@"File %@", nil), [(File*)[_files objectAtIndex:2] fileName]]];
+                    break;
+                } default: {
+                    break;
+                }
+            }
             break;
-        } case 2: {
-            [cell.textLabel setText:[NSString stringWithFormat:NSLocalizedString(@"File %@", nil), [(File*)[_files objectAtIndex:2] fileName]]];
-            break;
-        } default: {
-            break;
-        }
     }
     
     return cell;
@@ -237,6 +265,10 @@
                 default:
                     break;
             }
+            break;
+        }
+        case 2: { // crc
+            [self calculateCrcForFileNumber:0];
             break;
         }
         default:

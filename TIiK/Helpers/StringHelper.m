@@ -10,6 +10,7 @@
 
 // data
 #import "TIiKAppDelegate.h"
+#import "TIiKConstants.h"
 
 // models
 #import "Letter.h"
@@ -110,7 +111,7 @@
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 + (File*)saveFileWithName:(NSString*)fileName withManagedObjectContext:(NSManagedObjectContext*)context length:(int)length h:(float)h {
-    File *file = [NSEntityDescription insertNewObjectForEntityForName:@"File" inManagedObjectContext:context];
+    File *file = [NSEntityDescription insertNewObjectForEntityForName:kFile inManagedObjectContext:context];
     file.fileName = fileName;
     file.h = [NSNumber numberWithFloat:h];
     file.length = [NSNumber numberWithInt:length];
@@ -141,7 +142,7 @@
                          p:(float)p
                          i:(float)i {
     
-    Letter *letter = [NSEntityDescription insertNewObjectForEntityForName:@"Letter" inManagedObjectContext:context];
+    Letter *letter = [NSEntityDescription insertNewObjectForEntityForName:kLetter inManagedObjectContext:context];
     letter.letterName = [NSString stringWithFormat:@"%c", letterName];
     letter.occurence = [NSNumber numberWithInt:occurence];
     letter.p = [NSNumber numberWithFloat:p];

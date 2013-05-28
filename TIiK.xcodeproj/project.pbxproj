@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		643570381754D00100D3E3AC /* CRCHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 643570371754D00100D3E3AC /* CRCHelper.m */; };
 		6447042216F8EC3300BB1A99 /* Pol.txt in Resources */ = {isa = PBXBuildFile; fileRef = 6447042116F8EC3300BB1A99 /* Pol.txt */; };
 		6447042416F8EEE500BB1A99 /* Inf.txt in Resources */ = {isa = PBXBuildFile; fileRef = 6447042316F8EEE500BB1A99 /* Inf.txt */; };
 		6447042716F92A4F00BB1A99 /* StringHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 6447042616F92A4F00BB1A99 /* StringHelper.m */; };
@@ -14,6 +15,7 @@
 		6447043F16F9358E00BB1A99 /* File.m in Sources */ = {isa = PBXBuildFile; fileRef = 6447043E16F9358E00BB1A99 /* File.m */; };
 		6449B4031742DC0500FE1C18 /* LZWHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 6449B4021742DC0500FE1C18 /* LZWHelper.m */; };
 		6449B4061742E51A00FE1C18 /* LZWLetter.m in Sources */ = {isa = PBXBuildFile; fileRef = 6449B4051742E51A00FE1C18 /* LZWLetter.m */; };
+		6450065717437775005B24AC /* TIiKConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 6450065617437775005B24AC /* TIiKConstants.m */; };
 		647E37DD171EADD400BF331F /* HuffmanHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 647E37DC171EADD400BF331F /* HuffmanHelper.m */; };
 		647E37E1171EAE1B00BF331F /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 647E37DE171EAE1B00BF331F /* Default-568h@2x.png */; };
 		647E37E2171EAE1B00BF331F /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 647E37DF171EAE1B00BF331F /* Default.png */; };
@@ -33,6 +35,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		643570361754D00100D3E3AC /* CRCHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CRCHelper.h; path = Helpers/CRCHelper.h; sourceTree = "<group>"; };
+		643570371754D00100D3E3AC /* CRCHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CRCHelper.m; path = Helpers/CRCHelper.m; sourceTree = "<group>"; };
 		6447042116F8EC3300BB1A99 /* Pol.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = Pol.txt; path = Resources/Pol.txt; sourceTree = "<group>"; };
 		6447042316F8EEE500BB1A99 /* Inf.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = Inf.txt; path = Resources/Inf.txt; sourceTree = "<group>"; };
 		6447042516F92A4F00BB1A99 /* StringHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = StringHelper.h; path = Helpers/StringHelper.h; sourceTree = "<group>"; };
@@ -45,6 +49,8 @@
 		6449B4021742DC0500FE1C18 /* LZWHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LZWHelper.m; path = Helpers/LZWHelper.m; sourceTree = "<group>"; };
 		6449B4041742E51A00FE1C18 /* LZWLetter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LZWLetter.h; path = Models/LZWLetter.h; sourceTree = "<group>"; };
 		6449B4051742E51A00FE1C18 /* LZWLetter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LZWLetter.m; path = Models/LZWLetter.m; sourceTree = "<group>"; };
+		6450065517437775005B24AC /* TIiKConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TIiKConstants.h; sourceTree = "<group>"; };
+		6450065617437775005B24AC /* TIiKConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TIiKConstants.m; sourceTree = "<group>"; };
 		647E37DB171EADD400BF331F /* HuffmanHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HuffmanHelper.h; path = Helpers/HuffmanHelper.h; sourceTree = "<group>"; };
 		647E37DC171EADD400BF331F /* HuffmanHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HuffmanHelper.m; path = Helpers/HuffmanHelper.m; sourceTree = "<group>"; };
 		647E37DE171EAE1B00BF331F /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default-568h@2x.png"; path = "Resources/Default-568h@2x.png"; sourceTree = SOURCE_ROOT; };
@@ -95,6 +101,8 @@
 				647E37DC171EADD400BF331F /* HuffmanHelper.m */,
 				6449B4011742DC0500FE1C18 /* LZWHelper.h */,
 				6449B4021742DC0500FE1C18 /* LZWHelper.m */,
+				643570361754D00100D3E3AC /* CRCHelper.h */,
+				643570371754D00100D3E3AC /* CRCHelper.m */,
 			);
 			name = Helpers;
 			sourceTree = "<group>";
@@ -144,6 +152,8 @@
 			children = (
 				64ED5EC516F8E85E003F0203 /* TIiKAppDelegate.h */,
 				64ED5EC616F8E85E003F0203 /* TIiKAppDelegate.m */,
+				6450065517437775005B24AC /* TIiKConstants.h */,
+				6450065617437775005B24AC /* TIiKConstants.m */,
 				647E37DA171EADAC00BF331F /* Helpers */,
 				647E37E4171EAE3500BF331F /* ViewControllers */,
 			);
@@ -276,6 +286,8 @@
 				647E37E6171EB30900BF331F /* HuffmannTreeLeaf.m in Sources */,
 				6449B4031742DC0500FE1C18 /* LZWHelper.m in Sources */,
 				6449B4061742E51A00FE1C18 /* LZWLetter.m in Sources */,
+				6450065717437775005B24AC /* TIiKConstants.m in Sources */,
+				643570381754D00100D3E3AC /* CRCHelper.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

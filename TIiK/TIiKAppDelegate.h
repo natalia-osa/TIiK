@@ -41,12 +41,13 @@
  
  
  ### Labrotoria 3 ###
- Kodowanie arytmetyczne
+ Kodowanie arytmetyczne  -- undone
  
  ### Laboratoria 4 ###
  Metoda LZW
  
- Wzory:
+ ### Laboratoria 5 ###
+ Kod CRC
  
  **/
 

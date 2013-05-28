@@ -11,9 +11,16 @@
 
 #import "LZWHelper.h"
 #import "StringHelper.h"
+
 // structures
 #import "File.h"
 #import "Letter.h"
+
+// constants
+#define KDICTFILENAME @"LZWDictionary"
+#define KENCODEDFILENAME @"LZWEncodedString"
+#define KDECODEDFILENAME @"LZWDecodedString"
+
 
 @implementation LZWHelper
 @synthesize managedObjectContext = __managedObjectContext;
@@ -52,6 +59,8 @@
 //            NSLog(@"c=%@ // %d", lzwLetter.string, lzwLetter.code);
         }
     }
+    /// Zapisz słownik do pliku
+    [StringHelper saveString:[self convertToStringFromLZWObjectArray:lzwdict] toFileNamed:[NSString stringWithFormat:@"%@.txt", KDICTFILENAME]];
     
     /// 2. c := pierwszy symbol wejściowy
     int previousIndex = 0;
@@ -80,6 +89,9 @@
         }
     }
     
+    // free memony
+    free(buffer);
+    
     /// 4. Na końcu wypisz na wyjście kod związany c.
     if ([self dict:lzwdict containsString:c]) {
         NSInteger cCode = [self codeForString:c usingDict:lzwdict];
@@ -89,11 +101,11 @@
         NSLog(@"This shouldn't happen according to algorithm // last 'c' code do not have its code added to dict");
     }
     
-    // lzwdict are codes, save it to file
-    [StringHelper saveString:[self convertToStringFromLZWObjectArray:lzwdict] toFileNamed:@"LZWDictionary"];
     // encodedArray is compressed output, save it to file
-    [StringHelper saveString:[self createStringFromNumberArray:encodedArray] toFileNamed:@"LZWEncodedString"];
+    [StringHelper saveString:[self createStringFromNumberArray:encodedArray] toFileNamed:[NSString stringWithFormat:@"%@.txt", KENCODEDFILENAME]];
     
+    ////////////////////////////////////////////////////////////////////////////////////////////////////
+                                        /// decode ///
     ////////////////////////////////////////////////////////////////////////////////////////////////////
     
     /// 1. Wypełnij słownik alfabetem źródła informacji
@@ -148,7 +160,17 @@
     }
     
     // decodedArray is uncompressed output, save it to file
-    [StringHelper saveString:[self createStringFromStringArray:decodedArray] toFileNamed:@"LZWDecodedString"];
+    [StringHelper saveString:[self createStringFromStringArray:decodedArray] toFileNamed:[NSString stringWithFormat:@"%@.txt", KDECODEDFILENAME]];
+    
+    // NSLog compression
+    NSInteger inputSize = [plainText length]*8;
+    NSLog(@"input filesize: %d", inputSize);
+    
+    NSInteger outputSize = [[StringHelper getStringFromFileNamed:KENCODEDFILENAME] length]*3 + [[StringHelper getStringFromFileNamed:KDICTFILENAME] length]*8;
+    NSLog(@"output filesize: %d", outputSize);
+    
+    CGFloat compressionRate = (CGFloat)outputSize/inputSize*1.0f;
+    NSLog(@"compression rate: %f", compressionRate);
 }
 
 #pragma mark - Helpers
@@ -235,6 +257,9 @@
             string = [NSString stringWithFormat:@"%@%c", string, buffer[i]];
         }
     }
+    
+    // free memory
+    free(buffer);
     
     // if there wasn't new line at the end of file
     if (codeRead == YES) {

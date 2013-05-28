@@ -8,6 +8,8 @@
 
 #import "HuffmanHelper.h"
 #import "StringHelper.h"
+#import "TIiKConstants.h"
+
 // structures
 #import "File.h"
 #import "Letter.h"
@@ -143,9 +145,9 @@
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 - (NSArray*)fetchRequestForLettersInFileNamed:(NSUInteger)fileIndex {
     NSFetchRequest *letterFetch = [[NSFetchRequest alloc] init];
-    [letterFetch setEntity:[NSEntityDescription entityForName:@"Letter" inManagedObjectContext:__managedObjectContext]];
+    [letterFetch setEntity:[NSEntityDescription entityForName:kLetter inManagedObjectContext:__managedObjectContext]];
     [letterFetch setPredicate:[NSPredicate predicateWithFormat:@"file == %@", [_files objectAtIndex:fileIndex]]];
-    [letterFetch setSortDescriptors:@[[[NSSortDescriptor alloc] initWithKey:@"occurence" ascending:YES]]];
+    [letterFetch setSortDescriptors:@[[[NSSortDescriptor alloc] initWithKey:kOccurence ascending:YES]]];
     return [__managedObjectContext executeFetchRequest:letterFetch error:nil];
 }
 
@@ -167,6 +169,9 @@
             }
         }
     }
+    
+    // free memory
+    free(buffer);
     
     return encodedString;
 }
