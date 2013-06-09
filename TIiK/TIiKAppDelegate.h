@@ -49,6 +49,9 @@
  ### Laboratoria 5 ###
  Kod CRC
  
+ ### Laboratoria 6 ###
+ Zestawienie dla 1 tekstu do wszystkich rzeczy + odrobienie pozostałości (arytmetyczne)
+ 
  **/
 
 #import <UIKit/UIKit.h>

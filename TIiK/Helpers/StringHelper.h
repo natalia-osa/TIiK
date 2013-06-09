@@ -12,6 +12,7 @@
 
 // documents folder
 + (NSString*)getStringFromFileNamed:(NSString*)name;
++ (NSString*)openFileNamed:(NSString*)fileName;
 + (void)saveString:(NSString*)inputString toFileNamed:(NSString*)fileName;
 // string operations
 + (int)getNumberOfOccurenceOfString:(NSString*)smallString inString:(NSString*)bigString;

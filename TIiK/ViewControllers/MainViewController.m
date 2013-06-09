@@ -145,7 +145,8 @@
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 - (void)calculateCrcForFileNumber:(NSUInteger)fileNumber {
     CRCHelper *crcHelper = [[CRCHelper alloc] init];
-    [crcHelper crcData];
+    [crcHelper setManagedObjectContext:__managedObjectContext];
+    [crcHelper crcDataWithFileNumber:fileNumber files:_files];
 }
 
 

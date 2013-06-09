@@ -8,8 +8,12 @@
 
 #import <Foundation/Foundation.h>
 
-@interface CRCHelper : NSObject
+@interface CRCHelper : NSObject {
+    NSArray *_files;
+}
 
-- (void)crcData;
+@property (nonatomic, retain) NSManagedObjectContext *managedObjectContext;
+
+- (void)crcDataWithFileNumber:(NSUInteger)fileIndex files:(NSArray*)files;
 
 @end

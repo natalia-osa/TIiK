@@ -31,6 +31,16 @@
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
++ (NSString*)openFileNamed:(NSString*)fileName {
+#warning TO IMPROVE
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,
+                                                         NSUserDomainMask,
+                                                         YES);
+    NSString *fullPath = [[paths lastObject] stringByAppendingPathComponent:fileName];
+    return [NSString stringWithContentsOfFile:fullPath encoding:NSUTF8StringEncoding error:NULL];
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
 + (NSString*)getStringFromFileNamed:(NSString*)name {
     NSString *path = [[NSBundle mainBundle] pathForResource:name ofType:@"txt"];
     return [NSString stringWithContentsOfFile:path encoding:NSUTF8StringEncoding error:NULL];

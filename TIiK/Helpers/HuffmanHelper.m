@@ -25,6 +25,31 @@
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
+- (NSString*)onlyEncodeWithFileNumber:(NSUInteger)fileIndex files:(NSArray*)files {
+    _files = files;
+    
+    // load letters
+    NSArray *letters = [self fetchRequestForLettersInFileNamed:fileIndex];
+    
+    // save basic leafs
+    NSMutableArray *unusedLeafs = [self getbasicUnusedLeafsForLetters:letters];
+    
+    // create tree of codes
+    HuffmannTreeLeaf *topLeaf = [self createTreeOfCodesFromUnusedLeafs:unusedLeafs];
+    
+    // create codes
+    huffmanCodes = [[NSMutableArray alloc] init];
+    [self readChildLeafOf:topLeaf withSuperCode:@""];
+    // save huffman codes to file
+    NSString *huffmanCodesString = [self getHuffmanCodesString];
+    [StringHelper saveString:huffmanCodesString toFileNamed:@"code"];
+    
+    // encode
+    NSString *plainText = [StringHelper getStringFromFileNamed:[(File*)[files objectAtIndex:fileIndex] fileName]];
+    return [self encodePlainText:plainText];
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
 - (void)encodeDecodeWithFileNumber:(NSUInteger)fileIndex files:(NSArray*)files {
     _files = files;
     

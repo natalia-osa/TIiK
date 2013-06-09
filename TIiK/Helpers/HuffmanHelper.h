@@ -18,5 +18,6 @@
 @property (nonatomic, retain) NSManagedObjectContext *managedObjectContext;
 
 - (void)encodeDecodeWithFileNumber:(NSUInteger)fileIndex files:(NSArray*)files;
+- (NSString*)onlyEncodeWithFileNumber:(NSUInteger)fileIndex files:(NSArray*)files;
 
 @end
