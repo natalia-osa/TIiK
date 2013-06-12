@@ -56,6 +56,9 @@
     // load letters
     NSArray *letters = [self fetchRequestForLettersInFileNamed:fileIndex];
     
+    // count time - encoding start
+    NSDate *encodingStartDate = [NSDate date];
+    
     // save basic leafs
     NSMutableArray *unusedLeafs = [self getbasicUnusedLeafsForLetters:letters];
     
@@ -72,14 +75,30 @@
     // encode
     NSString *plainText = [StringHelper getStringFromFileNamed:[(File*)[files objectAtIndex:fileIndex] fileName]];
     NSString *encodedString = [self encodePlainText:plainText];
+    
+    // count time - encoding stop
+    NSTimeInterval encodingTimeInterval = [encodingStartDate timeIntervalSinceNow];
+    
     // save encoded string to file
     [StringHelper saveString:encodedString toFileNamed:@"encoded"];
     
     // decode
 #warning Should read huffman codes from file!
+    
+    // count time - decoding start
+    NSDate *decodingStartDate = [NSDate date];
+    
     NSString *decodedString = [self decodeEncryptedTextF:encodedString];
+    
+    // count time - decoding stop
+    NSTimeInterval decodingTimeInterval = [decodingStartDate timeIntervalSinceNow];
+    
     // save to file
     [StringHelper saveString:decodedString toFileNamed:@"decoded"];
+    
+    /// PRINT TIME
+    NSLog(@"Encoding: %f", -encodingTimeInterval);
+    NSLog(@"Decoding: %f", -decodingTimeInterval);
     
     UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Size"
                                                         message:[NSString stringWithFormat:@"decoded: %d; encoded: %d", [decodedString length], (int)floorf([encodedString length]/8.0f)]

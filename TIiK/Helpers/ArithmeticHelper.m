@@ -36,6 +36,9 @@
     // load letters array
     NSMutableArray *lettersArray = [self loadLettersFromFileIndex:fileIndex numberOfChars:([plainText length]+1)];
     
+    // count time - encoding start
+    NSDate *encodingStartDate = [NSDate date];
+    
     /// ENCODING
     // get output value
     double codedMin = [self encodeWithLettersArray:lettersArray fromPlainText:plainText];
@@ -45,6 +48,11 @@
     NSString *arithmeticLettersString = [self convertArithmeticLettersToString:lettersArray];
     [StringHelper saveString:[NSString stringWithFormat:@"%f%@", codedMin, arithmeticLettersString] toFileNamed:@"ArithmeticEncoded"];
     
+    // count time - encoding stop
+    NSTimeInterval encodingTimeInterval = [encodingStartDate timeIntervalSinceNow];
+    // count time - decoding start
+    NSDate *decodingStartDate = [NSDate date];
+    
     /// DECODING
     // get input string
     NSString *output = [self decodeWithArithmeticLetters:lettersArray codedValue:codedMin];
@@ -52,6 +60,13 @@
     NSLog(@"DECODED: %@", output);
     // save to file
     [StringHelper saveString:output toFileNamed:@"ArithmeticDecoded"];
+    
+    // count time - decoding stop
+    NSTimeInterval decodingTimeInterval = [decodingStartDate timeIntervalSinceNow];
+    
+    /// PRINT TIME
+    NSLog(@"Encoding: %f", -encodingTimeInterval);
+    NSLog(@"Decoding: %f", -decodingTimeInterval);
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////

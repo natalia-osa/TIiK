@@ -43,6 +43,9 @@
     unichar *buffer = calloc([plainText length], sizeof(unichar));
     [plainText getCharacters:buffer];
     
+    // count time - encoding start
+    NSDate *encodingStartDate = [NSDate date];
+    
     // Create encodedArray
     NSMutableArray *encodedArray = [[NSMutableArray alloc] init];
     
@@ -101,6 +104,9 @@
         NSLog(@"This shouldn't happen according to algorithm // last 'c' code do not have its code added to dict");
     }
     
+    // count time - encoding stop
+    NSTimeInterval encodingTimeInterval = [encodingStartDate timeIntervalSinceNow];
+    
     // encodedArray is compressed output, save it to file
     [StringHelper saveString:[self createStringFromNumberArray:encodedArray] toFileNamed:[NSString stringWithFormat:@"%@.txt", KENCODEDFILENAME]];
     
@@ -112,6 +118,9 @@
 #warning read values from file
 #warning put encode / decode into separate methods
     // got it in lzwdict - temp
+    
+    // count time - decoding start
+    NSDate *decodingStartDate = [NSDate date];
     
     // Create decodedArray
     NSMutableArray *decodedArray = [[NSMutableArray alloc] init];
@@ -159,6 +168,9 @@
         pk = k;
     }
     
+    // count time - decoding stop
+    NSTimeInterval decodingTimeInterval = [decodingStartDate timeIntervalSinceNow];
+    
     // decodedArray is uncompressed output, save it to file
     [StringHelper saveString:[self createStringFromStringArray:decodedArray] toFileNamed:[NSString stringWithFormat:@"%@.txt", KDECODEDFILENAME]];
     
@@ -171,6 +183,10 @@
     
     CGFloat compressionRate = (CGFloat)outputSize/inputSize*1.0f;
     NSLog(@"compression rate: %f", compressionRate);
+    
+    /// PRINT TIME
+    NSLog(@"Encoding: %f", -encodingTimeInterval);
+    NSLog(@"Decoding: %f", -decodingTimeInterval);
 }
 
 #pragma mark - Helpers

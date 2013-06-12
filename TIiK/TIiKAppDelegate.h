@@ -41,7 +41,7 @@
  
  
  ### Labrotoria 3 ###
- Kodowanie arytmetyczne  -- undone
+ Kodowanie arytmetyczne
  
  ### Laboratoria 4 ###
  Metoda LZW
