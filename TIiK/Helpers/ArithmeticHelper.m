@@ -22,14 +22,16 @@
     _files = files;
     
     /// ENCODING
-    // load letters array
-    NSMutableArray *lettersArray = [self loadLettersFromFileIndex:fileIndex];
-    
     // load input string
     NSString *plainText = [StringHelper getStringFromFileNamed:[(File*)[files objectAtIndex:fileIndex] fileName]];
+    // add escape sign
+    plainText = [NSString stringWithFormat:@"%@%c", plainText, '$'];
+    
+    // load letters array
+    NSMutableArray *lettersArray = [self loadLettersFromFileIndex:fileIndex numberOfChars:([plainText length]+1)];
     
     // create vector array
-    NSMutableArray *vectorArray = [self firstVersionOfVectorFromLettersArray:lettersArray];
+    NSMutableArray *vectorArray = [self firstVersionOfVectorFromArithmeticLetters:lettersArray];
     
     // get each sign from input
     unichar *buffer = calloc([plainText length], sizeof(unichar));
@@ -65,10 +67,8 @@
     }
 
     /// save output
-    // result number
-    double codedMin = [[vectorArray objectAtIndex:0] doubleValue];
-    // a little modification here - i don't use end sign, but save number of iterations as beginning of code
-    codedMin = codedMin + numberOfIterations;
+    // result number (always from n-1 object)
+    double codedMin = [[vectorArray objectAtIndex:([vectorArray count] - 2)] doubleValue];
     // log results
     NSLog(@"CODE: %f, %@", codedMin, lettersArray);
     
@@ -99,7 +99,7 @@
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-- (NSMutableArray*)loadLettersFromFileIndex:(NSUInteger)fileIndex {
+- (NSMutableArray*)loadLettersFromFileIndex:(NSUInteger)fileIndex numberOfChars:(int)numberOfChars {
     // load letters
     NSArray *letters = [self fetchRequestForLettersInFileNamed:fileIndex];
     
@@ -108,11 +108,17 @@
     for (Letter *letter in letters) {
         if (letter.occurence.intValue != 0) {
             ArithmeticLetter *arithmeticLetter = [[ArithmeticLetter alloc] init];
-            arithmeticLetter.code = letter.p.doubleValue;
+            arithmeticLetter.code = (letter.occurence.doubleValue / numberOfChars);
             arithmeticLetter.letterName = letter.letterName;
             [lettersArray addObject:arithmeticLetter];
         }
     }
+    
+    // add escape sign
+    ArithmeticLetter *arithmeticLetter = [[ArithmeticLetter alloc] init];
+    arithmeticLetter.code = (1.0 / numberOfChars);
+    arithmeticLetter.letterName = @"$";
+    [lettersArray addObject:arithmeticLetter];
     
     return lettersArray;
 }
@@ -127,23 +133,6 @@
     float previousMax = 0;
     for (ArithmeticLetter *arithmeticLetter in arithmeticLetters) {
         float newMax = previousMax + arithmeticLetter.code;
-        [vectorArray addObject:[NSNumber numberWithDouble:newMax]];
-        previousMax = newMax;
-    }
-    
-    return vectorArray;
-}
-
-////////////////////////////////////////////////////////////////////////////////////////////////////
-- (NSMutableArray*)firstVersionOfVectorFromLettersArray:(NSArray*)lettersArray {
-    // make first version of vector with values
-    NSMutableArray *vectorArray = [[NSMutableArray alloc] init];
-    // add 0 at the beginning
-    [vectorArray addObject:[NSNumber numberWithDouble:0.0]];
-    // get rest of values
-    float previousMax = 0;
-    for (ArithmeticLetter *letter in lettersArray) {
-        float newMax = previousMax + letter.code;
         [vectorArray addObject:[NSNumber numberWithDouble:newMax]];
         previousMax = newMax;
     }
