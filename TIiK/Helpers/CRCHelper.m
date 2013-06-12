@@ -19,11 +19,6 @@
 #import "File.h"
 #import "Letter.h"
 
-/**
- TODO:
- arytmetyczne
- **/
-
 @implementation CRCHelper
 @synthesize managedObjectContext = __managedObjectContext;
 
