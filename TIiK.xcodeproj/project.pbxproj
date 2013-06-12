@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		642C20081767BF1A00F36889 /* ArithmeticLetter.m in Sources */ = {isa = PBXBuildFile; fileRef = 642C20071767BF1A00F36889 /* ArithmeticLetter.m */; };
 		643570381754D00100D3E3AC /* CRCHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 643570371754D00100D3E3AC /* CRCHelper.m */; };
 		6447042216F8EC3300BB1A99 /* Pol.txt in Resources */ = {isa = PBXBuildFile; fileRef = 6447042116F8EC3300BB1A99 /* Pol.txt */; };
 		6447042416F8EEE500BB1A99 /* Inf.txt in Resources */ = {isa = PBXBuildFile; fileRef = 6447042316F8EEE500BB1A99 /* Inf.txt */; };
@@ -31,10 +32,13 @@
 		64ED5ED016F8E85E003F0203 /* TIiK.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 64ED5ECE16F8E85E003F0203 /* TIiK.xcdatamodeld */; };
 		64ED5EDA16F8E962003F0203 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 64ED5ED916F8E962003F0203 /* MainViewController.m */; };
 		64ED5EDC16F8EAF5003F0203 /* Eng.txt in Resources */ = {isa = PBXBuildFile; fileRef = 64ED5EDB16F8EAF5003F0203 /* Eng.txt */; };
+		64F44F1F17670FA400C94417 /* ArithmeticHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 64F44F1E17670FA400C94417 /* ArithmeticHelper.m */; };
 		64F96522171DE21000C9084B /* HuffmanCode.m in Sources */ = {isa = PBXBuildFile; fileRef = 64F96521171DE20F00C9084B /* HuffmanCode.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		642C20061767BF1A00F36889 /* ArithmeticLetter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ArithmeticLetter.h; path = Models/ArithmeticLetter.h; sourceTree = "<group>"; };
+		642C20071767BF1A00F36889 /* ArithmeticLetter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ArithmeticLetter.m; path = Models/ArithmeticLetter.m; sourceTree = "<group>"; };
 		643570361754D00100D3E3AC /* CRCHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CRCHelper.h; path = Helpers/CRCHelper.h; sourceTree = "<group>"; };
 		643570371754D00100D3E3AC /* CRCHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CRCHelper.m; path = Helpers/CRCHelper.m; sourceTree = "<group>"; };
 		6447042116F8EC3300BB1A99 /* Pol.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = Pol.txt; path = Resources/Pol.txt; sourceTree = "<group>"; };
@@ -73,6 +77,8 @@
 		64ED5ED816F8E962003F0203 /* MainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MainViewController.h; path = ViewControllers/MainViewController.h; sourceTree = "<group>"; };
 		64ED5ED916F8E962003F0203 /* MainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MainViewController.m; path = ViewControllers/MainViewController.m; sourceTree = "<group>"; };
 		64ED5EDB16F8EAF5003F0203 /* Eng.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = Eng.txt; path = Resources/Eng.txt; sourceTree = "<group>"; };
+		64F44F1D17670FA400C94417 /* ArithmeticHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ArithmeticHelper.h; path = Helpers/ArithmeticHelper.h; sourceTree = "<group>"; };
+		64F44F1E17670FA400C94417 /* ArithmeticHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ArithmeticHelper.m; path = Helpers/ArithmeticHelper.m; sourceTree = "<group>"; };
 		64F96520171DE20F00C9084B /* HuffmanCode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HuffmanCode.h; path = Models/HuffmanCode.h; sourceTree = "<group>"; };
 		64F96521171DE20F00C9084B /* HuffmanCode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HuffmanCode.m; path = Models/HuffmanCode.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -103,6 +109,8 @@
 				6449B4021742DC0500FE1C18 /* LZWHelper.m */,
 				643570361754D00100D3E3AC /* CRCHelper.h */,
 				643570371754D00100D3E3AC /* CRCHelper.m */,
+				64F44F1D17670FA400C94417 /* ArithmeticHelper.h */,
+				64F44F1E17670FA400C94417 /* ArithmeticHelper.m */,
 			);
 			name = Helpers;
 			sourceTree = "<group>";
@@ -188,6 +196,8 @@
 				647E37E5171EB30900BF331F /* HuffmannTreeLeaf.m */,
 				64F96520171DE20F00C9084B /* HuffmanCode.h */,
 				64F96521171DE20F00C9084B /* HuffmanCode.m */,
+				642C20061767BF1A00F36889 /* ArithmeticLetter.h */,
+				642C20071767BF1A00F36889 /* ArithmeticLetter.m */,
 				6449B4041742E51A00FE1C18 /* LZWLetter.h */,
 				6449B4051742E51A00FE1C18 /* LZWLetter.m */,
 			);
@@ -288,6 +298,8 @@
 				6449B4061742E51A00FE1C18 /* LZWLetter.m in Sources */,
 				6450065717437775005B24AC /* TIiKConstants.m in Sources */,
 				643570381754D00100D3E3AC /* CRCHelper.m in Sources */,
+				64F44F1F17670FA400C94417 /* ArithmeticHelper.m in Sources */,
+				642C20081767BF1A00F36889 /* ArithmeticLetter.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

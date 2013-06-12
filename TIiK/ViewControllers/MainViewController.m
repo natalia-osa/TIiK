@@ -17,6 +17,7 @@
 #import "HuffmanHelper.h"
 #import "LZWHelper.h"
 #import "CRCHelper.h"
+#import "ArithmeticHelper.h"
 
 // frameworks
 #import <math.h>
@@ -149,25 +150,29 @@
     [crcHelper crcDataWithFileNumber:fileNumber files:_files];
 }
 
+////////////////////////////////////////////////////////////////////////////////////////////////////
+- (void)encodeDecodeWithArithmeticForFileNumber:(NSUInteger)fileNumber {
+    ArithmeticHelper *arithmeticHelper = [[ArithmeticHelper alloc] init];
+    [arithmeticHelper setManagedObjectContext:__managedObjectContext];
+    [arithmeticHelper encodeDecodeWithFileNumber:fileNumber files:_files];
+}
+
 
 #pragma mark - UITableView delegate & datasource
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 3;
+    return 4;
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     switch (section) {
-        case 0: // hoffman
-            return 3;
-            break;
-        case 1: // lzw
-            return 3;
-            break;
-        default: // crc
+        case 2: // crc
             return 1;
+            break;
+        default: // hoffman, lzw, arithmetic
+            return 3;
             break;
     }
 }
@@ -183,6 +188,9 @@
             break;
         case 2:
             return NSLocalizedString(@"CRC", nil);
+            break;
+        case 3:
+            return NSLocalizedString(@"Arithmetic", nil);
             break;
         default:
             return @"";
@@ -270,6 +278,25 @@
         }
         case 2: { // crc
             [self calculateCrcForFileNumber:0];
+            break;
+        }
+        case 3: { // arithmetic
+            switch (indexPath.row) {
+                case 0: {
+                    [self encodeDecodeWithArithmeticForFileNumber:0];
+                    break;
+                }
+                case 1: {
+                    [self encodeDecodeWithArithmeticForFileNumber:1];
+                    break;
+                }
+                case 2: {
+                    [self encodeDecodeWithArithmeticForFileNumber:2];
+                    break;
+                }
+                default:
+                    break;
+            }
             break;
         }
         default:
